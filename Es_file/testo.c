@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
     struct stat sb;
     stat(argv[1], &sb);
     char *contenutoFile = malloc(sb.st_size);
+    char ch[sb.st_size];
     if (contenutoFile == NULL)
     {
         printf("Error\n\n");
@@ -40,16 +41,34 @@ int main(int argc, char *argv[])
     {
         if (strcmp(argv[3], "-c") == 0)
         {
-            if (strcmp(contenutoFile, argv[4]) == 0)
-                contatore++;
-            
+            if (strlen(argv[4]) == 1)
+            {
+                for (int i = 0; i < sb.st_size; i++)
+                {
+                    sprintf(ch ,"%c", contenutoFile[i]);
+                    if (strcmp(ch, argv[4]) == 0)                             
+                        contatore++;
+                }
+            }
+            else
+            {
+                printf("Errore, inserisci un solo carattere\n\n");
+                return 1;
+            }
             indicatore = "Il carattere";
         }
         else if (strcmp(argv[3], "-p") == 0)
         {
-            if (strcmp(contenutoFile, argv[4]) == 0)           
-                contatore++;
-
+            if (strlen(argv[4]) > 1)
+            {
+                if (strcmp(contenutoFile, argv[4]) == 0)           
+                    contatore++;
+            }        
+            else
+            {
+                printf("Errore inserisci una stringa\n\n");
+                return 1;
+            }
             indicatore = "La stringa";           
         }
     }
