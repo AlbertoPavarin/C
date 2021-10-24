@@ -1,3 +1,6 @@
+// Autore: ErPavac
+// Questo programma permette di ricercare una stringa o un carattere passato come parametro nel momento dell'esecuzione
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
