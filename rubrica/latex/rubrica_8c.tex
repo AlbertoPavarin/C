@@ -1,0 +1,123 @@
+\hypertarget{rubrica_8c}{}\doxysection{rubrica.\+c File Reference}
+\label{rubrica_8c}\index{rubrica.c@{rubrica.c}}
+
+
+Programma di gestione di una rubrica, permette di visualizzare la rubrica e modificarla, eliminando o aggiungedo contatti.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structPersona__T}{Persona\+\_\+T}}
+\begin{DoxyCompactList}\small\item\em struct \mbox{\hyperlink{structPersona__T}{Persona\+\_\+T}}, formata da un nome, cognome e numero \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{rubrica_8c_a09b169e48218ab340b5b1ebdce6440b4}{mostra\+Rubrica}} (char contenuto\+File\mbox{[}100\mbox{]}\mbox{[}100\mbox{]}, int lung)
+\begin{DoxyCompactList}\small\item\em funzione che stampa il contenuto della rubrica \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structPersona__T}{Persona\+\_\+T}} \mbox{\hyperlink{rubrica_8c_ac6e284e588a756328bf912fd8911eb39}{creazione\+Contatto}} (char numeri\mbox{[}100\mbox{]}\mbox{[}100\mbox{]}, int cont)
+\begin{DoxyCompactList}\small\item\em funzione che permette di creare una nuova persona inserendo il nome, il cognome e il numero di telefono \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{rubrica_8c_af2bb451be2c95b6f39dde1047ea3ea25}{aggiunta\+Contatto\+Sov}} (FILE $\ast$rubrica, char contenuto\+File\mbox{[}100\mbox{]}\mbox{[}100\mbox{]}, int lung, char numeri\mbox{[}100\mbox{]}\mbox{[}100\mbox{]})
+\begin{DoxyCompactList}\small\item\em funzione che permette di sovrascrive nella rubrica il nome della persona inserite tramite la funzione creazione\+Contatto \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{rubrica_8c_a60929cf95ab98bfeaba1b9f261078d8b}\label{rubrica_8c_a60929cf95ab98bfeaba1b9f261078d8b}} 
+void {\bfseries aggiunta\+Contatto\+NF} (FILE $\ast$rubrica, char contenuto\+File\mbox{[}100\mbox{]}\mbox{[}100\mbox{]}, int lung, char numeri\mbox{[}100\mbox{]}\mbox{[}100\mbox{]}, char $\ast$nuovo\+File)
+\item 
+\mbox{\Hypertarget{rubrica_8c_a6bdfcb0bb2b69370b36829bd4afd295d}\label{rubrica_8c_a6bdfcb0bb2b69370b36829bd4afd295d}} 
+void {\bfseries elimina\+Contatto} (char contenuto\+File\mbox{[}100\mbox{]}\mbox{[}100\mbox{]}, int lung, char numeri\mbox{[}100\mbox{]}\mbox{[}100\mbox{]}, char $\ast$nome\+File)
+\item 
+int \mbox{\hyperlink{rubrica_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em funzione principale \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Programma di gestione di una rubrica, permette di visualizzare la rubrica e modificarla, eliminando o aggiungedo contatti. 
+
+\begin{DoxyDate}{Date}
+14/11/2021 ~\newline
+ 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{rubrica_8c_af2bb451be2c95b6f39dde1047ea3ea25}\label{rubrica_8c_af2bb451be2c95b6f39dde1047ea3ea25}} 
+\index{rubrica.c@{rubrica.c}!aggiuntaContattoSov@{aggiuntaContattoSov}}
+\index{aggiuntaContattoSov@{aggiuntaContattoSov}!rubrica.c@{rubrica.c}}
+\doxysubsubsection{\texorpdfstring{aggiuntaContattoSov()}{aggiuntaContattoSov()}}
+{\footnotesize\ttfamily void aggiunta\+Contatto\+Sov (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{rubrica,  }\item[{char}]{contenuto\+File\mbox{[}100\mbox{]}\mbox{[}100\mbox{]},  }\item[{int}]{lung,  }\item[{char}]{numeri\mbox{[}100\mbox{]}\mbox{[}100\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+funzione che permette di sovrascrive nella rubrica il nome della persona inserite tramite la funzione creazione\+Contatto 
+
+
+\begin{DoxyParams}{Parameters}
+{\em FILE} & $\ast$rubrica\+: puntatore file \\
+\hline
+{\em char} & contenuto\+File\mbox{[}100\mbox{]}\mbox{[}100\mbox{]}\+: contiene il contenuto del file passato in input \\
+\hline
+{\em int} & lunghezza\+: numero che indica quante parole sono state lette dal file \\
+\hline
+{\em char} & numeri\mbox{[}100\mbox{]}\mbox{[}100\mbox{]}\+: contiene tutti i numeri della rubrica \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{rubrica_8c_ac6e284e588a756328bf912fd8911eb39}\label{rubrica_8c_ac6e284e588a756328bf912fd8911eb39}} 
+\index{rubrica.c@{rubrica.c}!creazioneContatto@{creazioneContatto}}
+\index{creazioneContatto@{creazioneContatto}!rubrica.c@{rubrica.c}}
+\doxysubsubsection{\texorpdfstring{creazioneContatto()}{creazioneContatto()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structPersona__T}{Persona\+\_\+T}} creazione\+Contatto (\begin{DoxyParamCaption}\item[{char}]{numeri\mbox{[}100\mbox{]}\mbox{[}100\mbox{]},  }\item[{int}]{cont }\end{DoxyParamCaption})}
+
+
+
+funzione che permette di creare una nuova persona inserendo il nome, il cognome e il numero di telefono 
+
+
+\begin{DoxyParams}{Parameters}
+{\em char} & numeri\mbox{[}100\mbox{]}\mbox{[}100\mbox{]}\+: contiene tutti i numeri presenti nella rubrica data in input \\
+\hline
+{\em int} & cont\+: contiene il numero di parole lette dal file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{structPersona__T}{Persona\+\_\+T}}\+: la funzione ritorna la persona che si desidera inserire nella rubrica 
+\end{DoxyReturn}
+\mbox{\Hypertarget{rubrica_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{rubrica_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{rubrica.c@{rubrica.c}!main@{main}}
+\index{main@{main}!rubrica.c@{rubrica.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+funzione principale 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & argc\+: contatore degli argomenti dati al momento dell\textquotesingle{}esecuzione \\
+\hline
+{\em char} & $\ast$argv\mbox{[}\mbox{]}\+: contiene tutti gli argomenti inseriti \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ritorna come si e\textquotesingle{} concluso il programma 
+\end{DoxyReturn}
+\mbox{\Hypertarget{rubrica_8c_a09b169e48218ab340b5b1ebdce6440b4}\label{rubrica_8c_a09b169e48218ab340b5b1ebdce6440b4}} 
+\index{rubrica.c@{rubrica.c}!mostraRubrica@{mostraRubrica}}
+\index{mostraRubrica@{mostraRubrica}!rubrica.c@{rubrica.c}}
+\doxysubsubsection{\texorpdfstring{mostraRubrica()}{mostraRubrica()}}
+{\footnotesize\ttfamily void mostra\+Rubrica (\begin{DoxyParamCaption}\item[{char}]{contenuto\+File\mbox{[}100\mbox{]}\mbox{[}100\mbox{]},  }\item[{int}]{lunghezza }\end{DoxyParamCaption})}
+
+
+
+funzione che stampa il contenuto della rubrica 
+
+
+\begin{DoxyParams}{Parameters}
+{\em char} & Contenuto\+File\mbox{[}100\mbox{]}\mbox{[}100\mbox{]}\+: contenuto del file passato in input \\
+\hline
+{\em char} & lunghezza\+: numero che contiene il numero di parole lette dal file \\
+\hline
+\end{DoxyParams}
