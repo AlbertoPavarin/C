@@ -1,0 +1,107 @@
+\hypertarget{es4__libro_8c}{}\doxysection{es4\+\_\+libro.\+c File Reference}
+\label{es4__libro_8c}\index{es4\_libro.c@{es4\_libro.c}}
+
+
+file dell\textquotesingle{}esercizio 4 del libro  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structPersona__T}{Persona\+\_\+T}}
+\begin{DoxyCompactList}\small\item\em struct \mbox{\hyperlink{structPersona__T}{Persona\+\_\+T}}\+: struct formata da un nome e un cognome \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{es4__libro_8c_a392fb874e547e582e9c66a08a1f23326}{MAX}}~15
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{es4__libro_8c_a39ce2b433ad4573a5c28b1c0c99d5aa1}{capitalize}} (char stringa\mbox{[}\mbox{\hyperlink{es4__libro_8c_a392fb874e547e582e9c66a08a1f23326}{MAX}}\mbox{]})
+\begin{DoxyCompactList}\small\item\em funzione che permette di trasformare la prima lettara in maiuscolo e tutte le altre in minuscolo \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{es4__libro_8c_ad1c0853076e3387529f0a670ae9db857}{upper}} (char stringa\mbox{[}\mbox{\hyperlink{es4__libro_8c_a392fb874e547e582e9c66a08a1f23326}{MAX}}\mbox{]})
+\begin{DoxyCompactList}\small\item\em funzione che permette di convertite tutta la stringa in maiuscolo \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{es4__libro_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em funzione principale, istanzia un processo figlio e il padre permette di leggere un nome ed un cognome, che verranno poi convertiti con la funzione capitalize e scritti in un file. Il file verra\textquotesingle{} poi eliminato. Il figlio contemporaneamente legge quello che c\textquotesingle{}e\textquotesingle{} dentro il file e lo stampa a schermo, solo dopo aver convertito il nome e il cognome usando la funzione upper \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+file dell\textquotesingle{}esercizio 4 del libro 
+
+\begin{DoxyDate}{Date}
+19/11/2021 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Alberto Pavarin 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{es4__libro_8c_a392fb874e547e582e9c66a08a1f23326}\label{es4__libro_8c_a392fb874e547e582e9c66a08a1f23326}} 
+\index{es4\_libro.c@{es4\_libro.c}!MAX@{MAX}}
+\index{MAX@{MAX}!es4\_libro.c@{es4\_libro.c}}
+\doxysubsubsection{\texorpdfstring{MAX}{MAX}}
+{\footnotesize\ttfamily \#define MAX~15}
+
+
+\begin{DoxyParams}{Parameters}
+{\em MAX} & lunghezza massima del nome e del cognome \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{es4__libro_8c_a39ce2b433ad4573a5c28b1c0c99d5aa1}\label{es4__libro_8c_a39ce2b433ad4573a5c28b1c0c99d5aa1}} 
+\index{es4\_libro.c@{es4\_libro.c}!capitalize@{capitalize}}
+\index{capitalize@{capitalize}!es4\_libro.c@{es4\_libro.c}}
+\doxysubsubsection{\texorpdfstring{capitalize()}{capitalize()}}
+{\footnotesize\ttfamily void capitalize (\begin{DoxyParamCaption}\item[{char}]{stringa\mbox{[}\+MAX\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+funzione che permette di trasformare la prima lettara in maiuscolo e tutte le altre in minuscolo 
+
+
+\begin{DoxyParams}{Parameters}
+{\em char} & stringa\mbox{[}MAX\mbox{]}\+: stringa da convertire \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{es4__libro_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{es4__libro_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{es4\_libro.c@{es4\_libro.c}!main@{main}}
+\index{main@{main}!es4\_libro.c@{es4\_libro.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+funzione principale, istanzia un processo figlio e il padre permette di leggere un nome ed un cognome, che verranno poi convertiti con la funzione capitalize e scritti in un file. Il file verra\textquotesingle{} poi eliminato. Il figlio contemporaneamente legge quello che c\textquotesingle{}e\textquotesingle{} dentro il file e lo stampa a schermo, solo dopo aver convertito il nome e il cognome usando la funzione upper 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & argc\+: contatore degli argomenti inseriti da riga di comando. dovranno essere 2, il nome del programma e il nome del file da creare (es\+: ./a.out input.\+txt) \\
+\hline
+{\em char} & $\ast$argv\mbox{[}\mbox{]}\+: contiene tutti gli argomenti passati da riga di comando (argv\mbox{[}0\mbox{]} == a.\+out, argv\mbox{[}1\mbox{]} == input.\+txt) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{es4__libro_8c_ad1c0853076e3387529f0a670ae9db857}\label{es4__libro_8c_ad1c0853076e3387529f0a670ae9db857}} 
+\index{es4\_libro.c@{es4\_libro.c}!upper@{upper}}
+\index{upper@{upper}!es4\_libro.c@{es4\_libro.c}}
+\doxysubsubsection{\texorpdfstring{upper()}{upper()}}
+{\footnotesize\ttfamily void upper (\begin{DoxyParamCaption}\item[{char}]{stringa\mbox{[}\+MAX\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+funzione che permette di convertite tutta la stringa in maiuscolo 
+
+
+\begin{DoxyParams}{Parameters}
+{\em char} & stringa\mbox{[}MAX\mbox{]}\+: stringa da convertire \\
+\hline
+\end{DoxyParams}
