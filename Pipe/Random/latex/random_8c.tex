@@ -1,0 +1,49 @@
+\hypertarget{random_8c}{}\doxysection{random.\+c File Reference}
+\label{random_8c}\index{random.c@{random.c}}
+
+
+programma che permette, istanziando un processo ed una pipe, di sommare dei numeri randomici e sommarli  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{random_8c_a392fb874e547e582e9c66a08a1f23326}{MAX}}~10
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{random_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{random_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+int {\bfseries main} ()
+\begin{DoxyCompactList}\small\item\em funzione principale che crea una pipe, successivamente istanzia un processo figlio. Il processo padre genera 10 numeri casuali e li passa al figlio utilizzando la pipe. Successivamente il processo figlio li somma e passa la somma al padre, il quale stampera\textquotesingle{} il risultato \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+programma che permette, istanziando un processo ed una pipe, di sommare dei numeri randomici e sommarli 
+
+\begin{DoxyDate}{Date}
+15/12/2021 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Pavarin Alberto ~\newline
+ 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{random_8c_a392fb874e547e582e9c66a08a1f23326}\label{random_8c_a392fb874e547e582e9c66a08a1f23326}} 
+\index{random.c@{random.c}!MAX@{MAX}}
+\index{MAX@{MAX}!random.c@{random.c}}
+\doxysubsubsection{\texorpdfstring{MAX}{MAX}}
+{\footnotesize\ttfamily \#define MAX~10}
+
+
+\begin{DoxyParams}{Parameters}
+{\em MAX} & numeri da generare \\
+\hline
+\end{DoxyParams}
