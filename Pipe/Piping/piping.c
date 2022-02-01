@@ -21,7 +21,9 @@ int main()
         dup(fd[1]); // duplica il canale di scrittura della pipe
         close(fd[1]); // chiude il canale originale
         close(fd[0]); // chiude il canale di lettura
-        execlp("cat", "cat", "file.txt", NULL); // exec per chiamare il comando cat per file.txt
+        execlp("/bin/cat", "cat", "file.txt", NULL); // exec per chiamare il comando cat per file.txt
+        printf("Errore\n");
+        exit(1);
     }
     else
     {
@@ -32,11 +34,15 @@ int main()
             dup(fd[0]);
             close(fd[0]);
             close(fd[1]);
-            execlp("wc", "wc", NULL); // exec per chiamare il comando wc (conta righe, parole e caratteri) sul file.txt
+            execlp("/bin/wc", "wc", NULL); // exec per chiamare il comando wc (conta righe, parole e caratteri) sul file.txt
+            printf("Errore\n");
+            exit(2);
         }
         else
         {
             wait(&status);
+            close(fd[0]);
+            close(fd[1]);
             return 0;
         }
     }
