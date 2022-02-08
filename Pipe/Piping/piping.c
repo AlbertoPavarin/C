@@ -17,7 +17,7 @@ int main()
     pid1 = fork(); // crea un processo figlio
     if (pid1 == 0)
     {
-        close(1); // chiude STDIN
+        close(1); // chiude STDOUT
         dup(fd[1]); // duplica il canale di scrittura della pipe
         close(fd[1]); // chiude il canale originale
         close(fd[0]); // chiude il canale di lettura
@@ -30,7 +30,7 @@ int main()
         pid2 = fork(); // crea un secondo processo figlio
         if (pid2 == 0)
         {
-            close(0); // chiude STDOUT
+            close(0); // chiude STDIN
             dup(fd[0]);
             close(fd[0]);
             close(fd[1]);
