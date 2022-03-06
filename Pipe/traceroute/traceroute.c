@@ -4,8 +4,15 @@
 #include <strings.h>
 #include <string.h>
 
-int main()
+int main(int argc, char *argv[])
 {
+
+    if (argc != 2)
+    {
+        printf("Errore negli argomenti\n");
+        exit(5);
+    }
+
     int pid1, pid2, pid3, p1p2[2], p2p3[2], p3p0[2];
     double totale = 0;
     char buff[1], *ptr, strSec[100];
@@ -23,7 +30,7 @@ int main()
         close(1);
         dup(p1p2[1]);
         close(p1p2[1]);
-        execl("/bin/cat", "cat", "file.txt", NULL);
+        execl("/bin/traceroute", "traceroute", argv[1], NULL);
         return -1;
     }
 
@@ -66,8 +73,8 @@ int main()
         close(p2p3[0]);
 
         close(p3p0[0]);
-        //close(1);
-        //dup(p3p0[1]),
+        close(1);
+        dup(p3p0[1]),
         close(p3p0[1]);
 
         execl("/bin/tail", "tail", "-n", "+2", NULL);
@@ -80,19 +87,17 @@ int main()
     close(p2p3[1]);
     close(p3p0[1]);
     
-    fflush(stdout);
     while (read(p3p0[0], buff, 1) > 0)
     {
         strncat(strSec, &buff[0], sizeof(buff[0]));
         if (buff[0] == '\n' || buff[0] == '*')
         {
-            printf("numero ricevuto %s\n", strSec);
             totale += strtod(strSec, &ptr);
             strSec[0] = '\0';
         }
     }
 
     close(p3p0[0]);
-    printf("Totale: %.2lf ms\n", totale);
+    printf("Totale: %.3lf ms\n", totale);
     return 0;
 }
