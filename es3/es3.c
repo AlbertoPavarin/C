@@ -82,6 +82,34 @@ int eliminaElemento(int numeri[], int numeroDaEliminare)
     return n;
 }
 
+void scambiaPosizioni(int numeri[]) // Funziona solo con dimensioni pari
+{
+    int tmp = 0, i = 1;
+    while (i <= DIM)
+    {
+        tmp = numeri[i];
+        numeri[i] = numeri[i - 1];
+        numeri[i - 1] = tmp;
+        i += 2;
+    }
+}
+
+void riodina(int numeri[])
+{
+    for (int i = 0; i < DIM; i++)
+    {
+        for (int j = 0; j < DIM; j++)
+        {
+            if (numeri[j] > numeri[j + 1])
+            {
+                int tmp = numeri[j];
+                numeri[j] = numeri[j + 1];
+                numeri[j + 1] = tmp;
+            }
+        }
+    }
+}
+
 int main()
 {
     int scelta, numeri[DIM], nDaCerc, nDaElim;
@@ -106,7 +134,7 @@ int main()
         printf("Premi 8 per Ordinare l'array\n");
         scanf("%d", &scelta);
         printf("\n");
-    } while (scelta < 1 || scelta > 7);
+    } while (scelta < 1 || scelta > 8);
 
     switch (scelta)
     {
@@ -138,8 +166,12 @@ int main()
             printf("\n");
             break;
         case 7:
+            scambiaPosizioni(numeri);
+            stampaElementi(numeri);
             break;
         case 8:
+            riodina(numeri);
+            stampaElementi(numeri);
             break;
         default:
             break;
