@@ -82,10 +82,10 @@ int eliminaElemento(int numeri[], int numeroDaEliminare)
     return n;
 }
 
-void scambiaPosizioni(int numeri[]) // Funziona solo con dimensioni pari
+void scambiaPosizioni(int numeri[])
 {
     int tmp = 0, i = 1;
-    while (i <= DIM)
+    while (i < DIM)
     {
         tmp = numeri[i];
         numeri[i] = numeri[i - 1];
