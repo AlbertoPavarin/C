@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define DIM 6
+#define DIM 5
 
 void stampaElementi(int numeri[])
 {
@@ -20,6 +20,17 @@ void stampaElementiInversi(int numeri[])
         printf("%d ", numeri[i]);
     }
     printf("\n");
+}
+
+void sommaMedia(int numeri[], int *somma, float *media)
+{
+    for (int i = 0; i < DIM; i++)
+    {
+        
+        (*somma) += numeri[i];
+    }
+
+    (*media) = (*somma) / DIM;
 }
 
 void stampareNumeriPari(int numeri[])
@@ -64,22 +75,16 @@ int ricercaNumero(int numeri[], int numeroCercare)
 int eliminaElemento(int numeri[], int numeroDaEliminare)
 {
     int trovato = 0;
-    int n = DIM;
+    int j = 0;
     for (int i = 0; i < DIM; i++)
     {
-        if (numeri[i] == numeroDaEliminare)
+        if (numeri[i] != numeroDaEliminare)
         {
-            numeri[i] = numeri[i + 1];
-            trovato = 1;
-            n--;
-        }
-        if (trovato == 1)
-        {
-            numeri[i] = numeri[i + 1];
+            numeri[j++] = numeri[i];
         }
     }
 
-    return n;
+    return j;
 }
 
 void scambiaPosizioni(int numeri[])
@@ -112,7 +117,8 @@ void riodina(int numeri[])
 
 int main()
 {
-    int scelta, numeri[DIM], nDaCerc, nDaElim;
+    int scelta, numeri[DIM], nDaCerc, nDaElim, somma = 0;
+    float media = 0;
 
     for (int i = 0; i < DIM; i++)
     {
@@ -126,12 +132,13 @@ int main()
     {
         printf("Premi 1 per Stampare gli elementi dell'array\n");
         printf("Premi 2 per Stampare gli elementi dell'array in modo inverso\n");
-        printf("Premi 3 per Stmapare gli elementi pari\n");
-        printf("Premi 4 per Stampare gli elementi dispari\n");
-        printf("Premi 5 per Ricercare un numero nell'array\n");
-        printf("Premi 6 per Eliminare un elemento dell'array\n");
-        printf("Premi 7 per Alternare a due a due le posizioni dell'array\n");
-        printf("Premi 8 per Ordinare l'array\n");
+        printf("Premi 3 per fare la somma e media degli elementi degli array\n");
+        printf("Premi 4 per Stmapare gli elementi pari\n");
+        printf("Premi 5 per Stampare gli elementi dispari\n");
+        printf("Premi 6 per Ricercare un numero nell'array\n");
+        printf("Premi 7 per Eliminare un elemento dell'array\n");
+        printf("Premi 8 per Alternare a due a due le posizioni dell'array\n");
+        printf("Premi 9 per Ordinare l'array\n");
         scanf("%d", &scelta);
         printf("\n");
     } while (scelta < 1 || scelta > 8);
@@ -145,31 +152,38 @@ int main()
             stampaElementiInversi(numeri);
             break;
         case 3:
-            stampareNumeriPari(numeri);
+            sommaMedia(numeri, &somma, &media);
+            printf("La somma è : %d\nLa media è: %.2f\n", somma, media);
             break;
         case 4:
-            stampareNumeriDispari(numeri);
+            stampareNumeriPari(numeri);
             break;
         case 5:
+            stampareNumeriDispari(numeri);
+            break;
+        case 6:
             printf("Inserisci un numero da cercare\n");
             scanf("%d", &nDaCerc);
             printf("Il numero %d compare %d volte\n", nDaCerc, ricercaNumero(numeri, nDaCerc));
             break;
-        case 6:
+        case 7:
             printf("Inserisci un numero da eliminare\n");
             scanf("%d", &nDaElim);
             int n = eliminaElemento(numeri, nDaElim);
             for (int i = 0; i < n; i++)
             {
-                printf("%d ", numeri[i]);
+                //if (numeri[i] != 0)
+                //{
+                    printf("%d ", numeri[i]);
+                //}
             }
             printf("\n");
             break;
-        case 7:
+        case 8:
             scambiaPosizioni(numeri);
             stampaElementi(numeri);
             break;
-        case 8:
+        case 9:
             riodina(numeri);
             stampaElementi(numeri);
             break;
