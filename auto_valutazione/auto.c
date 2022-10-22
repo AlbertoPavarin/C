@@ -41,7 +41,7 @@ void ordinaCres(int num[], int dim)
 
 int main()
 {
-    int numeri[DIM], cnt = 0, numeriEsaminati[DIM], dispari[DIM], pari[DIM], cntPari = 0, cntDispari = 0, k = 0, dim = DIM, c = 0, controllo = 0, num[DIM];
+    int numeri[DIM], cnt = 0, numeriEsaminati[DIM], dispari[DIM], pari[DIM], cntPari = 0, cntDispari = 0, k = 0, dim = DIM, c = 0, controllo = 0, num[DIM], ne = 0;
     for (int i = 0; i < DIM; i++)
     {
         printf("Inserisci %d° numero\n", i + 1);
@@ -55,12 +55,20 @@ int main()
         cnt = 0;
         for (int j = 0; j < DIM; j++)
         {
-            if (numeri[i] == numeri[j])
+            if (numeriEsaminati[j] == numeri[i])
+            {
+                break;
+            }
+            else if (numeri[i] == numeri[j])
             {
                 cnt++;
             }
+            if (j == DIM - 1)
+            {
+                printf("%d cnt: %d\n", numeri[i], cnt);
+            }
         }
-        printf("%d cnt: %d\n", numeri[i], cnt);
+        numeriEsaminati[ne++] = numeri[i];
     }
 
     for (int i = 0; i < dim; i++)
