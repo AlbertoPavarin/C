@@ -30,7 +30,6 @@ int main(int argc,char** argv)
 
     // Connessione al server
     connect(socketfd,(struct sockaddr*)&servizio,sizeof(servizio));
-    
     printf("Inserisci la stringa\n");
     scanf("%s",str1);
     // Scrittura stringa sulla socket

@@ -33,7 +33,7 @@ int main()
     // ciclo infinito
     while (1)
     {
-        printf("\n\nServer in ascolto...");
+        printf("Server in ascolto...");
 
         fflush(stdout); // pulisce buffer comunicazione
 
@@ -50,7 +50,6 @@ int main()
         write(soa, str, sizeof(str));
         
         close(soa);
-
      }
       
    return 0;
