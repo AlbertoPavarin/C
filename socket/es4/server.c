@@ -10,33 +10,11 @@
 #define DIM 256
 #define SERVERPORT 6565
 
-void assegnaVett(char str[], char vocali[], char consonanti[], char caratteri[])
-{
-    int vocC = 0, consC = 0, carC = 0;
-    for (int i = 0; i < strlen(str); i++)
-    {
-        if (toupper(str[i]) == 'A' || toupper(str[i]) == 'E' || toupper(str[i]) == 'I' || toupper(str[i]) == 'O' || toupper(str[i]) == 'U')
-        {
-            vocali[vocC++] = str[i];
-        }
-        else if (isalpha(str[i]))
-        {
-            consonanti[consC++] = str[i];
-        }
-        else 
-        {
-            caratteri[carC++] = str[i];
-        }
-    }
-
-    printf("%s\n%s\n%s\n\n", vocali, consonanti, caratteri);
-}
-
 int main()
 {
     struct sockaddr_in servizio, addr_remoto;
-    int socketfd, soafd, sizeFrom = sizeof(servizio), cnt = 0;
-    char str[DIM], ricercare[1], vocali[DIM], consonanti[DIM], caratteriSpec[DIM];
+    int socketfd, soafd, sizeFrom = sizeof(servizio);
+    char str[DIM], vocali[DIM], consonanti[DIM], caratteriSpec[DIM];
 
     servizio.sin_family = AF_INET;
     servizio.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -55,16 +33,38 @@ int main()
         fflush(stdout);
 
         soafd = accept(socketfd, (struct sockaddr*)&servizio, &sizeFrom);
+
+        str[0] = '\0';
         
         read(soafd, str, sizeof(str));
 
         printf("Stringa ricevuta: %s\n", str);
 
-        assegnaVett(str, vocali, consonanti, caratteriSpec);
+        consonanti[0] = '\0';
+        vocali[0] = '\0';
+        caratteriSpec[0] = '\0';
 
-        printf("%s\n%s\n%s\n\n", vocali, consonanti, caratteriSpec);
+        int vocC = 0, consC = 0, carC = 0;
 
-        //write(soafd, &cnt, sizeof(int));
+        for (int i = 0; i < strlen(str); i++)
+        {
+            if (toupper(str[i]) == 'A' || toupper(str[i]) == 'E' || toupper(str[i]) == 'I' || toupper(str[i]) == 'O' || toupper(str[i]) == 'U')
+            {   
+                vocali[vocC++] = str[i]; 
+            }
+            else if (isalpha(str[i]))
+            {
+                consonanti[consC++] = str[i];
+            }
+            else 
+            {   
+                caratteriSpec[carC++] = str[i];
+            }
+        }
+
+        write(soafd, vocali, sizeof(vocali));
+        write(soafd, consonanti, sizeof(consonanti));
+        write(soafd, caratteriSpec, sizeof(caratteriSpec));
 
         printf("\n\n");
 

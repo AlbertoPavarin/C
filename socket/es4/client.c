@@ -13,7 +13,7 @@ int main()
 {
     struct sockaddr_in servizio;
     int socketfd;
-    char str[DIM];
+    char str[DIM], vocali[DIM], consonanti[DIM], caratteriSpec[DIM];
 
     servizio.sin_family = AF_INET;
     servizio.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -27,6 +27,12 @@ int main()
     scanf("%s", str);
 
     write(socketfd, str, sizeof(str));
+
+    read(socketfd, vocali, sizeof(vocali));
+    read(socketfd, consonanti, sizeof(consonanti));
+    read(socketfd, caratteriSpec, sizeof(caratteriSpec));
+    
+    printf("\n\nVocali: %s\nConsonanti: %s\nCaratteri e Numeri: %s\n", vocali, consonanti, caratteriSpec);
 
     close(socketfd);
 
