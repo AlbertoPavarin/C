@@ -21,7 +21,11 @@ int main()
 
     socketfd = socket(AF_INET, SOCK_STREAM, 0);
 
-    connect(socketfd, (struct sockaddr*)&servizio, sizeof(servizio));
+    if ((connect(socketfd, (struct sockaddr *)&servizio, sizeof(servizio))) < 0)
+    {
+        printf("Scemo non c'è er servero");
+        exit(EXIT_FAILURE);
+    }
 
     printf("Inserisci stringa:\n");
     scanf("%s", str);
@@ -31,7 +35,7 @@ int main()
     read(socketfd, vocali, sizeof(vocali));
     read(socketfd, consonanti, sizeof(consonanti));
     read(socketfd, caratteriSpec, sizeof(caratteriSpec));
-    
+
     printf("\n\nVocali: %s\nConsonanti: %s\nCaratteri e Numeri: %s\n", vocali, consonanti, caratteriSpec);
 
     close(socketfd);

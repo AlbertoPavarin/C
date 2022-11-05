@@ -10,6 +10,14 @@
 #define DIM 256
 #define SERVERPORT 6565
 
+void Clear(char *buff){
+    for (int i = 0; i < DIM; i++)
+    {
+        buff[i] = 0;
+    }
+    
+}
+
 int main()
 {
     struct sockaddr_in servizio, addr_remoto;
@@ -40,9 +48,9 @@ int main()
 
         printf("Stringa ricevuta: %s\n", str);
 
-        consonanti[0] = '\0';
-        vocali[0] = '\0';
-        caratteriSpec[0] = '\0';
+        Clear(consonanti);
+        Clear(vocali);
+        Clear(caratteriSpec);
 
         int vocC = 0, consC = 0, carC = 0;
 
