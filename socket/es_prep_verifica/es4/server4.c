@@ -19,16 +19,18 @@ void clearBuffer(char str[])
     
 }
 
-int eliminaSpec(char str[], int len)
+int eliminaSpec(char str[], int len, char newStr[])
 {
     int k = 0;
     for (int i = 0; i < len; i++)
     {
         if (isalpha(str[i]) > 0)
         {
-            str[k++] = str[i];
+            newStr[k++] = str[i];
         }
     }
+
+    printf("%s\n", newStr);
 
     return k;
 }
@@ -52,7 +54,7 @@ void ordina(char str[], int len)
 int main()
 {
     struct sockaddr_in servizio, addr_remoto;
-    char str[DIM];
+    char str[DIM], newStr[DIM];
     int socketfd, soa, fromlen = sizeof(servizio);
 
     servizio.sin_family = AF_INET;
@@ -75,11 +77,16 @@ int main()
 
         printf("Stringa: %s\n", str);
 
-        int len = eliminaSpec(str, strlen(str));
+        int len = eliminaSpec(str, strlen(str), newStr);
+
+        ordina(newStr, len);
+
+        write(soa, newStr, len);
 
         printf("\n\n");
 
         clearBuffer(str);
+        clearBuffer(newStr);
 
         close(soa);
     }
