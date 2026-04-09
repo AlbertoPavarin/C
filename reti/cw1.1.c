@@ -70,9 +70,10 @@ int main() {
     int j = 0;
     int i = 0;
     int csize = 0;
+    //int bsize = 0;
     char *request = "GET / HTTP/1.1\r\n\r\n";
     char headerbuffer[10000];
-    char chunkbuffer[5];
+    char chunkbuffer[6];
     char body[1000000];
     char *pchunksize = NULL;
 
@@ -109,18 +110,24 @@ int main() {
     for (i = 0; h[i].name[0]; i++) {
         printf("%s: %s\n", h[i].name, h[i].value);
     }
-    
-    while (1) {
-        read(s, chunkbuffer, 4);
-        chunkbuffer[4] = 0;
-        printf("aaa: %s\n", chunkbuffer);
-        csize = htoi(chunkbuffer);
-        printf("Grandezza chunk: %d\n", csize);
-        
-        if (csize == 0) break;
+   while (1) {
+            for(int i = 0; read(s, chunkbuffer+i, 1); i++) {
+                if (chunkbuffer[i] == '\n' && chunkbuffer[i-1] == '\r') {
+                    chunkbuffer[i-1] = 0;
+                    break;
+            }
+        }
 
-        while((t = read(s, body+counter, csize-counter)))
+        csize = htoi(chunkbuffer);
+        
+        if (csize == 0) break;       
+        int letti = 0;
+        while((t = read(s, body+counter, csize-letti))){
             counter += t;
+            letti += t;
+        }
+        char padding[2];       
+        read(s, padding, 2);
     }
 
     printf("%s\n", body);
