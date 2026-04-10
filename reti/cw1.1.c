@@ -23,7 +23,7 @@ short int endian() {
         return 0;
 }
 
-short int network_order(short int x){
+short int network_order(short int x) {
     if (endian() == 0)
         return x;
    
@@ -35,7 +35,7 @@ short int network_order(short int x){
     return x;
 }
 
-int stringatoint(char *s){
+int stringatoint(char *s) {
     int tot = 0;
     for(int i = 0; ((s[i] <= '9') && (s[i] >= '0')); i++)
         tot = tot*10 + s[i] - '0';
@@ -43,7 +43,7 @@ int stringatoint(char *s){
     return tot;
 }
 
-int htoi(char *s){
+int htoi(char *s) {
     int tot = 0;
     for(int i = 0; s[i]; i++) {
         if (s[i]<='9' && s[i]>='0')
@@ -54,6 +54,14 @@ int htoi(char *s){
             tot = tot * 16 + (s[i]-'A'+10);
     }
     return tot;
+}
+
+int sonouguali(char *s1, char *s2) {
+    for(int i = 0; s1[i] != 0 || s2[i] != 0; i++){
+        if (s1[i] != s2[i]) return 0;
+    }
+
+    return 1;
 }
 
 int main() {
@@ -70,7 +78,8 @@ int main() {
     int j = 0;
     int i = 0;
     int csize = 0;
-    //int bsize = 0;
+    char fixed = 0;
+    int contentlenght = 0;
     char *request = "GET / HTTP/1.1\r\n\r\n";
     char headerbuffer[10000];
     char chunkbuffer[6];
@@ -86,11 +95,10 @@ int main() {
         return -1;
     }
 
-    printf("Socket connessa\n");
     write(s, request, strlen(request));
     
     h[0].name = headerbuffer;
-    int separator = 0;
+    char separator = 0;
     for (i = 0; read(s, headerbuffer+i, 1); i++) {
        if (headerbuffer[i] == ':' && !separator){
            separator = 1;
@@ -108,28 +116,36 @@ int main() {
     }
     
     for (i = 0; h[i].name[0]; i++) {
+        if (sonouguali(h[i].name, "Content-Length")) {
+            fixed = 1;
+            contentlenght = stringatoint(h[i].value + 1);
+        }
         printf("%s: %s\n", h[i].name, h[i].value);
     }
-   while (1) {
+
+    if (!fixed) {
+        while (1) {
             for(int i = 0; read(s, chunkbuffer+i, 1); i++) {
                 if (chunkbuffer[i] == '\n' && chunkbuffer[i-1] == '\r') {
                     chunkbuffer[i-1] = 0;
                     break;
+                }
             }
-        }
 
-        csize = htoi(chunkbuffer);
+            csize = htoi(chunkbuffer);
         
-        if (csize == 0) break;       
-        int letti = 0;
-        while((t = read(s, body+counter, csize-letti))){
-            counter += t;
-            letti += t;
+            if (csize == 0) break;       
+            int bread = 0;
+            while((t = read(s, body+counter, csize-bread))){
+                counter += t;
+                bread += t;
+            }
+               
+            read(s, chunkbuffer, 2);
         }
-        char padding[2];       
-        read(s, padding, 2);
+    } else {
+       for(counter = 0; (t = read(s, body+counter, contentlenght-counter)); counter+=t); 
     }
-
     printf("%s\n", body);
 
     return 0;
