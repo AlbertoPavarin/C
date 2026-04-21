@@ -75,6 +75,7 @@ int main() {
     int t, counter = 0;
     int j = 0;
     int i = 0;
+    int n = 0;
     int rlcnt = 0;
     int yes = 1;
     int csize = 0;
@@ -84,6 +85,7 @@ int main() {
     int lunghezza;
     char chunkbuffer[6];
     char body[1000000];
+    char fcontent[5000];
     char *pchunksize = NULL;
     struct sockaddr_in remote;
     int remotesz = sizeof(remote);
@@ -106,12 +108,11 @@ int main() {
     }
 
     while (1) {
-        if ((s2 = accept(s, (struct sockaddr*)&remote, &remotesz)) == -1){
+        if ((s2 = accept(s, (struct sockaddr*)&remote, (socklen_t *)&remotesz)) == -1){
            perror("Errore accept");
            return -1;
         }
         
-        printf("Connessione accettata\n");
         h[0].name = headerbuffer;
         char separator = 0;
         for (i = 0; read(s2, headerbuffer+i, 1); i++) {
@@ -146,9 +147,20 @@ int main() {
         rl[rlcnt++] = 0;
 
         printf("Richiesta: %s %s %s\n", method, url, version);
-        char * response_200 = "HTTP/1.1 200 OK\r\nContent-Length:39\r\n\r\n<html><H1>Torno Subito!</H1><br></html>";
+        char * response_200 = "HTTP/1.1 200 OK\r\n\r\n";
         char * response_404 = "HTTP/1.1 404 File not found\r\n\r\n";
         char * response_500 = "HTTP/1.1 500 Internal Server Error\r\n\r\n";
+
+        f = fopen(url+1, "r");
+        if (f == NULL)
+            write(s2, response_404, strlen(response_404));
+        else {
+            write(s2, response_200, strlen(response_200));
+            do {
+                n = fread(fcontent, 1, 5000, f);
+            } while (n == 5000);
+            write(s2, fcontent, n);
+        }
         // if (!fixed) {
         //     while (1) {
         //     for(int i = 0; read(s, chunkbuffer+i, 1); i++) {
@@ -171,8 +183,7 @@ int main() {
         // } else {
         //     for(counter = 0; (t = read(s, body+counter, contentlenght-counter)); counter+=t); 
         // }
-    write(s2, response_404, strlen(response_404));
-    close(s2);
+        close(s2);  
     }
     return 0;
 }
