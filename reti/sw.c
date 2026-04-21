@@ -158,8 +158,8 @@ int main() {
             write(s2, response_200, strlen(response_200));
             do {
                 n = fread(fcontent, 1, 5000, f);
+                write(s2, fcontent, n);
             } while (n == 5000);
-            write(s2, fcontent, n);
         }
         // if (!fixed) {
         //     while (1) {
