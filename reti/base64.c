@@ -18,7 +18,6 @@ int main(){
     len = strlen(s);
     carry = len % 3;    
     int dimbased = (carry == 0) ? len*4/3 :  len*4/3+(4-carry);
-    printf("dim: %d\n", dimbased);
     char based[dimbased]; // spazio calcolato con il rapporto 4/3 e un appropriato padding
     for (int i = 0; i < len;) {
         char b0 = s[i++];
@@ -31,7 +30,7 @@ int main(){
     }
 
     for (int i = 0; i < dimbased; i++)
-        printf("%c ", based[i]);
+        printf("%c", based[i]);
     
     printf("\n");
     return 0;
