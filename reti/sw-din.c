@@ -114,10 +114,9 @@ int main() {
            perror("Errore accept");
            return -1;
         }
-        
         h[0].name = headerbuffer;
         char separator = 0;
-        for (i = 0; read(s2, headerbuffer+i, 1); i++) {
+        for (i = 0, j = 0; read(s2, headerbuffer+i, 1); i++) {
             if (headerbuffer[i] == ':' && !separator){
                 separator = 1;
                 headerbuffer[i] = 0;
@@ -137,7 +136,6 @@ int main() {
                lunghezza = stringatoint(h[i].value+1);
                printf("%s: %s\n", h[i].name, h[i].value);
         }
-        rlcnt = 0;
         rl = h[0].name;
         method = rl;
         for (rlcnt = 0; rl[rlcnt] != ' '; rlcnt++); 
@@ -146,8 +144,6 @@ int main() {
         for (;rl[rlcnt] != ' '; rlcnt++); 
         rl[rlcnt++] = 0;
         version = rl+rlcnt;
-        for (;rl[rlcnt] != ':'; rlcnt++); 
-        rl[rlcnt++] = 0;
 
         printf("Richiesta: %s %s %s\n", method, url, version);
         char * response_200 = "HTTP/1.1 200 OK\r\n\r\n";
